@@ -1,12 +1,13 @@
 import React from 'react';
 
+//choice component to display type of choice
 export const Choice = ({selected,onSelected,question=[]}) => {
     return (
         <div className="choice">
             {
                 question.map((item,index)=>{
                     return (
-                        <div key={index} onClick={()=>onSelected(item.key,item.value)} className={selected == item.value?'button selected':'button'}>{item.field}</div>
+                        <div key={index} onClick={()=>onSelected(item.key,item.value)} className={selected === item.value?'button selected':'button'}>{item.field}</div>
                     )
                     
                 })
@@ -15,6 +16,7 @@ export const Choice = ({selected,onSelected,question=[]}) => {
     )
 }
 
+//input component to display type of input
 export const Input = ({value,onChange,question = [],onsubmit}) => {
     return (
         <div className="choice">
@@ -23,10 +25,3 @@ export const Input = ({value,onChange,question = [],onsubmit}) => {
     )
 }
 
-export const Message = ({question = []}) => {
-    return (
-        <div className="choice">
-            <h4></h4>
-        </div>
-    )
-}

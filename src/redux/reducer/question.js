@@ -6,12 +6,17 @@ const initialstate = {
     step:0
 };
 
+//answer will be stored in this
+
 export default function question(state = initialstate,action)
 {
     switch(action.type)
     {
+        // when posting answer
         case ANSWER_POST:
             return {...state,loading:true};
+
+        // when next step question has to be displayed
         case NEXT_STEP:
             if(action.answer)
             {

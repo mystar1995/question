@@ -15,11 +15,12 @@ class FirstStep  extends React.Component{
             answer:""
         }
     }
-
+    
     componentDidMount()
     {
         const {dispatch,questions} = this.props;
         console.log(questions.loading);
+         //when the component has to be moved to next automatically
         if(!questions.loading && this.state.questions[questions.step].data[0].dataVal[Object.keys(this.state.questions[questions.step].data[0].dataVal)[0]].action_type == 'automatic')
         {
             dispatch({type:ANSWER_POST,answer:false});
@@ -30,6 +31,7 @@ class FirstStep  extends React.Component{
     {
         const {dispatch,questions} = this.props;
 
+        //when the component has to be moved to next automatically
         if(!questions.loading && this.state.questions[questions.step].data[0].dataVal[Object.keys(this.state.questions[questions.step].data[0].dataVal)[0]].action_type == 'automatic')
         {
             dispatch({type:ANSWER_POST,answer:false});
@@ -37,8 +39,11 @@ class FirstStep  extends React.Component{
         }
     }
 
+    //function to ordering json input with order value
     orderconfig = () => {
         let data = [];
+
+        //prepare data from json file
         for(let item in config.data.items)
         {
             if(config.data.items[item].data.length > 0)
@@ -47,6 +52,7 @@ class FirstStep  extends React.Component{
             }
         }
 
+        //sorting array with order value that it has
         data.sort(function(a,b){
             let ordera = 0; let orderb = 0;
 
@@ -72,6 +78,7 @@ class FirstStep  extends React.Component{
         return data;
     }
 
+    //get audio file from provided step info
     getaudio = () => {
         let {questions} = this.props;
         for(let item in this.state.questions[questions.step].data)
@@ -83,6 +90,7 @@ class FirstStep  extends React.Component{
         }
     }
 
+    //getting component type from step info
     gettype = () => {
         let {questions} = this.props;
         if(this.state.questions[questions.step].data.length > 0)
@@ -90,15 +98,9 @@ class FirstStep  extends React.Component{
             let keys = Object.keys(this.state.questions[questions.step].data[0].dataVal);
             return keys[0];
         }
-        else
-        {
-            this.setState(state=>({
-                ...state,
-                index:state.index + 1
-            }))
-        }
     }
 
+    //getting component answer data and component type
     getanswer = () => {
         let {questions} = this.props;
         if(this.state.questions[questions.step].data[0].dataVal[Object.keys(this.state.questions[questions.step].data[0].dataVal)[0]].answer)
@@ -111,6 +113,7 @@ class FirstStep  extends React.Component{
         } 
     }
 
+    //on choice component, when clicking component button
     onselect = (key,answer) => {
         let data = {};
         data[key] = answer;
@@ -128,12 +131,14 @@ class FirstStep  extends React.Component{
         
     }
 
+    //on input component, the value of input is changed
     onchange = (value) => {
         this.setState({
             answer:value
         })
     }   
 
+    //on input component, when enter clicked, then it will submit the result
     onsubmit = (key,e) => {
         var code = (e.keyCode ? e.keyCode : e.which);
         let data = {};
@@ -152,12 +157,12 @@ class FirstStep  extends React.Component{
     render()
     {
         let {questions} = this.props;
-        console.log(this.state.questions[questions.step].data[0].dataVal[Object.keys(this.state.questions[questions.step].data[0].dataVal)[0]]);
         console.log(questions.step);
         return (
             <div className="firststep">
                 <video id="background" muted loop src="/background.mp4" autoPlay></video>
-                <audio ref="audio" src={this.getaudio()} autoPlay></audio>
+                <audio src={this.getaudio()} autoPlay></audio>
+                {/* component type is choice */}
                 
                 {
                     (!questions.loading && this.gettype() == 'Type_Choice') && (
@@ -166,6 +171,8 @@ class FirstStep  extends React.Component{
                         </Fade>
                     )
                 }        
+
+                {/* component type is input */}
                 {
                     (!questions.loading && this.gettype() == 'Type_Input') && (
                         <Fade in style={{margin:'auto',marginTop:'70vh'}} delay={1000}>
