@@ -65,7 +65,11 @@
 .choice h4
 {
   font-size:20px;
+}
 
+input
+{
+  min-width:400px;
 }
 
 .button
