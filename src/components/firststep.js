@@ -75,7 +75,8 @@ class FirstStep  extends React.Component{
             return false;
         } 
     }
-
+    
+    //get the title of questions
     gettitle = () => {
         let {questions} = this.props;
         if(questions.questions[questions.step].data[0].dataVal[Object.keys(questions.questions[questions.step].data[0].dataVal)[0]].title)

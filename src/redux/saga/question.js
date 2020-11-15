@@ -52,6 +52,7 @@ function  orderconfig(config){
     return data;
 }
 
+//get the questions from url
 export function* init_questionitems()
 {
     try
