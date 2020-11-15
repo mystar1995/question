@@ -1,7 +1,8 @@
-import {NEXT_STEP,ANSWER_POST} from '../constant';
+import {NEXT_STEP,ANSWER_POST,Loading, LOAD_END} from '../constant';
 
 const initialstate = {
     loading:false,
+    questions:[],
     answers:{},
     step:0
 };
@@ -13,6 +14,10 @@ export default function question(state = initialstate,action)
     switch(action.type)
     {
         // when posting answer
+        case Loading:
+            return {...state,questions:action.questions};
+        case LOAD_END:
+            return {...state,loading:false};
         case ANSWER_POST:
             return {...state,loading:true};
 
@@ -20,7 +25,7 @@ export default function question(state = initialstate,action)
         case NEXT_STEP:
             if(action.answer)
             {
-                return {...state,answers:{...state.answers,...action.answer},step:state.step + 1,loading:false};
+                return {...state,answers:{...state.answers,...action.answer},step:state.step + 1,loading:true};
             }
             else
             {

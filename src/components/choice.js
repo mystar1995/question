@@ -1,9 +1,11 @@
 import React from 'react';
 
 //choice component to display type of choice
-export const Choice = ({selected,onSelected,question=[]}) => {
+export const Choice = ({selected,onSelected,question=[],title}) => {
     return (
         <div className="choice">
+            <h4>{title}</h4>
+            <div style={{display:'flex'}}>
             {
                 question.map((item,index)=>{
                     return (
@@ -12,15 +14,19 @@ export const Choice = ({selected,onSelected,question=[]}) => {
                     
                 })
             }
+            </div>
         </div>
     )
 }
 
 //input component to display type of input
-export const Input = ({value,onChange,question = [],onsubmit}) => {
+export const Input = ({value,onChange,question = [],onsubmit,title}) => {
     return (
         <div className="choice">
-            <input className="form-control" value={value} onChange={(e)=>onChange(e.target.value)} onKeyPress={(e)=>onsubmit(question[0].key,e)}></input>
+            <h4>{title}</h4>
+            <div>
+                <input className="form-control" value={value} onChange={(e)=>onChange(e.target.value)} onKeyPress={(e)=>onsubmit(question[0].key,e)}></input>
+            </div>
         </div>
     )
 }

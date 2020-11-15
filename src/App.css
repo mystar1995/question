@@ -55,12 +55,17 @@
 
 .choice
 {
-  display:flex;
   margin:auto;
-  padding:50px 100px;
+  padding:30px 100px;
   background:url('./images/Window.png');
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.choice h4
+{
+  font-size:20px;
+
 }
 
 .button
