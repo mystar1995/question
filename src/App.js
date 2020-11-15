@@ -1,24 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import {createBrowserHistory} from 'history';
+import {Provider} from 'react-redux';
+import configureStore from './redux/store';
+import FirstStep from './components/firststep';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const store = configureStore();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+           <FirstStep/> 
+      </div>
+    </Provider>
+    
   );
 }
 
